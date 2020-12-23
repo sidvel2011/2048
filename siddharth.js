@@ -1,6 +1,6 @@
 var mytable=document.getElementById('siddharth');
-
-var values = new Array(6);
+var size = 4;
+var values = new Array(size);
 initialize();
 
 
@@ -56,10 +56,10 @@ function setColor(value){
 }
 
 function createTable(){
-  for(i=0; i<6; i++){//ROWs
+  for(i=0; i<size; i++){//ROWs
     var row = mytable.insertRow(i);
-    values[i] = new Array(6);
-  for(j=0; j<6; j++){
+    values[i] = new Array(size);
+  for(j=0; j<size; j++){
     values[i][j] = null;
     var col = row.insertCell(j);
     col.innerHTML = values[i][j];
@@ -76,8 +76,8 @@ function pickRandomCell(min, max){
 }
 
 function refreshTable(){
-  for(i=0; i<6; i++){//ROWs
-    for(j=0; j<6; j++){
+  for(i=0; i<size; i++){//ROWs
+    for(j=0; j<size; j++){
       mytable.rows[i].cells[j].innerHTML = values[i][j];
       mytable.rows[i].cells[j].style.backgroundColor = setColor(values[i][j]);
     }
@@ -87,16 +87,16 @@ function refreshTable(){
 function fillNewEntry(){
   var random;
   do{
-    random = pickRandomCell(0, 36);
-  }while (values[Math.floor(random/6)][(random % 6)] != null);
+    random = pickRandomCell(0, (size * size));
+  }while (values[Math.floor(random/size)][(random % size)] != null);
   //assign value 2 on the random cell
-  values[Math.floor(random/6)][(random % 6)] = 2;
+  values[Math.floor(random/size)][(random % size)] = 2;
 }
 
 function checkGameOver(){
   var gameOver = true;
-  for(i=0; i<6; i++){//ROWs
-    for(j=0; j<6; j++){
+  for(i=0; i<size; i++){//ROWs
+    for(j=0; j<size; j++){
       if(values[i][j] == null){
         gameOver = false;
       }
@@ -134,8 +134,8 @@ function move(direction){
 
 function moveRight(){
   var i, j, k;
-  for (i=0;i<6;i++){
-    for(j=5;j>=0;j--){
+  for (i=0;i<size;i++){
+    for(j=size-1;j>=0;j--){
       //console.log("j is " + j);
       var x=values[i][j];
       if(!x){
@@ -156,8 +156,8 @@ function moveRight(){
 
 
 function addRight(){
-  for(i=0;i<6;i++){
-    for(j=5;j>=1;j--){
+  for(i=0;i<size;i++){
+    for(j=size-1;j>=1;j--){
       var current = values[i][j];
       var prev = values[i][j-1];
       if(current && prev && current == prev){
@@ -186,12 +186,12 @@ function checkWin(value){
 
 function moveLeft(){
   var i, j, k;
-  for (i=0;i<6;i++){
-    for(j=0;j<6;j++){
+  for (i=0;i<size;i++){
+    for(j=0;j<size;j++){
       //console.log("j is " + j);
       var x=values[i][j];
       if(!x){
-        for(k=j+1; k<6; k++){
+        for(k=j+1; k<size; k++){
           //console.log("k is " + k);
           var y=values[i][k];
           if(!y){
@@ -208,8 +208,8 @@ function moveLeft(){
 
 
 function addLeft(){
-  for(i=0;i<6;i++){
-    for(j=0;j<5;j++){
+  for(i=0;i<size;i++){
+    for(j=0;j<size-1;j++){
       var current = values[i][j];
       var next = values[i][j+1];
       if(current && next && current == next){
@@ -227,12 +227,12 @@ function addLeft(){
 
 function moveUp(){
   var i, j, k;
-  for (i=0;i<6;i++){//column
-    for(j=0;j<6;j++){//row
+  for (i=0;i<size;i++){//column
+    for(j=0;j<size;j++){//row
       //console.log("j is " + j);
       var x=values[j][i];
       if(!x){
-        for(k=j+1; k<6; k++){
+        for(k=j+1; k<size; k++){
           //console.log("k is " + k);
           var y=values[k][i];
           if(!y){
@@ -249,8 +249,8 @@ function moveUp(){
 
 
 function addUp(){
-  for(i=0;i<6;i++){//column
-    for(j=0;j<5;j++){//row
+  for(i=0;i<size;i++){//column
+    for(j=0;j<size-1;j++){//row
       var current = values[j][i];
       var next = values[j+1][i];
       if(current && next && current == next){
@@ -267,8 +267,8 @@ function addUp(){
 
 function moveDown(){
   var i, j, k;
-  for (i=0;i<6;i++){//column
-    for(j=5;j>=0;j--){//row
+  for (i=0;i<size;i++){//column
+    for(j=size-1;j>=0;j--){//row
       //console.log("j is " + j);
       var x=values[j][i];
       if(!x){
@@ -289,8 +289,8 @@ function moveDown(){
 
 function addDown(){
   console.log(values);
-  for(i=0;i<6;i++){//column
-    for(j=5;j>=1;j--){//row
+  for(i=0;i<size;i++){//column
+    for(j=size-1;j>=1;j--){//row
       var current = values[j][i];
       var prev = values[j-1][i];
       if(current && prev && current == prev){
