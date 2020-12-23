@@ -97,11 +97,12 @@ function checkGameOver(){
   var gameOver = true;
   for(i=0; i<size; i++){//ROWs
     for(j=0; j<size; j++){
-      if(values[i][j] == null){
+      if(!values[i][j]){
         gameOver = false;
       }
     }
   }
+  console.log('game over is: ' + gameOver);
   return gameOver;
 }
 
@@ -127,7 +128,10 @@ function move(direction){
   //Refresh table
   refreshTable();
   if (checkGameOver()){
-    document.getElementById('createNewEntry').disabled = true;
+    document.getElementById('up').disabled = true;
+    document.getElementById('down').disabled = true;
+    document.getElementById('left').disabled = true;
+    document.getElementById('right').disabled = true;
     alert('Game Over');
   }
 }
@@ -174,7 +178,6 @@ function addRight(){
 function checkWin(value){
   if (value == 2048){
     alert ('Congrats, you win!!');
-    document.getElementById('createNewEntry').disabled = true;
     document.getElementById('up').disabled = true;
     document.getElementById('down').disabled = true;
     document.getElementById('left').disabled = true;
