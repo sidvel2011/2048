@@ -12,6 +12,30 @@ function initialize(){
   //values[0][0] = 2;
   fillNewEntry();
   refreshTable();
+  document.onkeydown = checkKey;
+}
+
+function checkKey(e) {
+
+    e = e || window.event;
+
+    if (e.keyCode == '38') {
+        // up arrow
+        move('up');
+    }
+    else if (e.keyCode == '40') {
+        // down arrow
+        move('down');
+    }
+    else if (e.keyCode == '37') {
+       // left arrow
+       move('left');
+    }
+    else if (e.keyCode == '39') {
+       // right arrow
+       move('right');
+    }
+
 }
 
 function setColor(value){
