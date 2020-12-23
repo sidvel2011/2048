@@ -102,7 +102,7 @@ function checkGameOver(){
       }
     }
   }
-  console.log('game over is: ' + gameOver);
+  //console.log('game over is: ' + gameOver);
   return gameOver;
 }
 
@@ -291,7 +291,7 @@ function moveDown(){
 }
 
 function addDown(){
-  console.log(values);
+  //console.log(values);
   for(i=0;i<size;i++){//column
     for(j=size-1;j>=1;j--){//row
       var current = values[j][i];
